@@ -3,7 +3,7 @@ define(["require", "exports", 'PageManager'], function (require, exports, PageMa
     exports.pageManager = new PageManager_1.PageManager();
     exports.VERSION = "1.0.0";
     //Note: This is using hard coded simple auth. HMAC auth is recommended for production and requires some crypto
-    var boltUrlBase = "http://localhost:8888/";
+    var boltUrlBase = "http://" + window.location.hostname + ":8888/";
     var username = "publicweb";
     var userkey = "webaccess1";
     var retryMs = 1000;

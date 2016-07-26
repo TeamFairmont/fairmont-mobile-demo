@@ -9,7 +9,7 @@ export var pageManager:PageManager = new PageManager();
 export const VERSION:string = "1.0.0";
 
 //Note: This is using hard coded simple auth. HMAC auth is recommended for production and requires some crypto
-var boltUrlBase:string = "http://localhost:8888/";
+var boltUrlBase:string = "http://"+window.location.hostname+":8888/";
 var username:string = "publicweb";
 var userkey:string = "webaccess1";
 var retryMs:number = 1000;
