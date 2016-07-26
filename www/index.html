@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/onsenui.css">
+        <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        
+        <title>Fairmont Mobile Demo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script type="text/javascript" src="js/onsenui.js"></script>
+        <script data-main="js/index.js" type="text/javascript" src="js/require.js"></script>
+    </head>
+    <body>  
+        <!--<div id="app"></div>-->
+        <ons-splitter>
+            <ons-splitter-side id="menu" side="right" width="220px" collapse swipeable> 
+            </ons-splitter-side>
+            <ons-splitter-content id="app"></ons-splitter-content>
+        </ons-splitter>
+        <ons-modal id="loading" style="text-align: center;">
+            <strong>Loading...</strong><br/><br/>
+            <ons-progress-circular indeterminate style="width:96px;height:96px;"></ons-progress-circular><br/><br/><br/>
+            Our store is experiencing unusually high traffic right now. <br/><br/>Thank you for your patience. 
+        </ons-modal>
+    </body>
+</html>

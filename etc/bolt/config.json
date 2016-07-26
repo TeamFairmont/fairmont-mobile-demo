@@ -1,0 +1,238 @@
+{
+    "apiCalls": {
+        "mobile/getHomeBanners": {
+            "resultTimeoutMs": 300,
+            "resultZombieMs": 5000,
+            "requiredParams": {},
+            "commands": [{
+                "name": "home/banners",
+                "resultTimeoutMs": 300,
+                "configParams": {
+                    "platform": "mobile"
+                }
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call gets the homepage banner image array of URLs"
+        },
+        "mobile/getRecommendedProducts": {
+            "resultTimeoutMs": 500,
+            "resultZombieMs": 5000,
+            "requiredParams": { "userId": "string" },
+            "commands": [{
+                "name": "products/recommended",
+                "resultTimeoutMs": 500,
+                "configParams": {
+                    "max": 4
+                }
+            },{
+                "name": "products/get-recommended-promo-prices",
+                "resultTimeoutMs": 500,
+                "configParams": {}
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call gets recommended product listings for a user with special pricing"
+        },
+        "mobile/getCategoryProducts": {
+            "resultTimeoutMs": 500,
+            "resultZombieMs": 5000,
+            "requiredParams": { "categoryId": "int64"},
+            "commands": [{
+                "name": "products/category",
+                "resultTimeoutMs": 500,
+                "configParams": {
+                    "max": 50
+                }
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call gets product listings for a category"
+        },
+        "mobile/getProductDetail": {
+            "resultTimeoutMs": 500,
+            "resultZombieMs": 5000,
+            "requiredParams": { "sku": "string"},
+            "commands": [{
+                "name": "products/detail",
+                "resultTimeoutMs": 500,
+                "configParams": {}
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call gets a product's complete detail"
+        },
+        "mobile/getCategories": {
+            "resultTimeoutMs": 500,
+            "resultZombieMs": 5000,
+            "requiredParams": {},
+            "commands": [{
+                "name": "categories/get",
+                "resultTimeoutMs": 500,
+                "configParams": {"amount":"all"}
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call gets all categories for showing in mobile"
+        }
+    },
+
+    "commandMeta": { 
+	    "home/banners": {
+            "requiredParams": {},
+            "shortDescription": "This worker grabs homepage banners using the configParam.platform field",
+            "stubReturn": {
+                "images":["https://placekitten.com/265/309",
+                    "https://placekitten.com/258/337",
+                    "https://placekitten.com/266/309",
+                    "https://placekitten.com/90/269"]
+            },
+            "stubDelayMs": 20
+        },
+        "categories/get": {
+            "requiredParams": {},
+            "shortDescription": "Gets categories depending on configParams.amount",
+            "stubReturn": {
+                "categories":[
+                    {"name":"Delicious Cakes", "id":1},
+                    {"name":"Amazing Cakes", "id":2},
+                    {"name":"Super Cookies", "id":3},
+                    {"name":"Candy Bars", "id":4},
+                    {"name":"Hard Sweets", "id":5},
+                    {"name":"Cheesecake", "id":6}
+                ]
+            },
+            "stubDelayMs": 100
+        },
+        "products/detail": {
+            "requiredParams": { "sku": "string" },
+            "shortDescription": "Gets a product",
+            "stubReturn": {
+                "name":"Super Cake", 
+                "desc":"This product is truly amazing", 
+                "price":34.95, 
+                "sku":"scake", 
+                "stock": 1, 
+                "previewImage":"https://placekitten.com/128/96",
+                "images":["https://placekitten.com/150/150",
+                    "https://placekitten.com/150/100",
+                    "https://placekitten.com/100/150",
+                    "https://placekitten.com/100/50"
+                ]
+            },
+            "stubDelayMs": 100
+        },
+        "products/category": {
+            "requiredParams": { "categoryId": "int64" },
+            "shortDescription": "Gets products in a category",
+            "stubReturn": {
+                "products":[
+                    {"name":"White Cake", "price":11.95, "sku":"wcake", "stock": 1, "previewImage":"https://placekitten.com/118/96"},
+                    {"name":"Chocolate Cake", "price":10.95, "sku":"ccake", "stock": 0, "previewImage":"https://placekitten.com/96/86"},
+                    {"name":"Strawberry Cake", "price":22.95, "sku":"scake", "stock": 2, "previewImage":"https://placekitten.com/63/96"},
+                    {"name":"White Cake", "price":11.95, "sku":"wcake", "stock": 1, "previewImage":"https://placekitten.com/118/96"},
+                    {"name":"Chocolate Cake", "price":10.95, "sku":"ccake", "stock": 0, "previewImage":"https://placekitten.com/96/86"},
+                    {"name":"Strawberry Cake", "price":22.95, "sku":"scake", "stock": 2, "previewImage":"https://placekitten.com/63/96"},
+                    {"name":"White Cake", "price":11.95, "sku":"wcake", "stock": 1, "previewImage":"https://placekitten.com/118/96"},
+                    {"name":"Chocolate Cake", "price":10.95, "sku":"ccake", "stock": 0, "previewImage":"https://placekitten.com/96/86"},
+                    {"name":"Strawberry Cake", "price":22.95, "sku":"scake", "stock": 2, "previewImage":"https://placekitten.com/63/96"},
+                    {"name":"White Cake", "price":11.95, "sku":"wcake", "stock": 1, "previewImage":"https://placekitten.com/118/96"},
+                    {"name":"Chocolate Cake", "price":10.95, "sku":"ccake", "stock": 0, "previewImage":"https://placekitten.com/96/86"},
+                    {"name":"Strawberry Cake", "price":22.95, "sku":"scake", "stock": 2, "previewImage":"https://placekitten.com/63/96"}
+                ]
+            },
+            "stubDelayMs": 2000
+        },
+        "products/recommended": {
+            "requiredParams": { "userId": "string" },
+            "shortDescription": "Gets recommended products",
+            "stubReturn": {
+                "products":[
+                    {"name":"Super Cake", "price":10.00, "sku":"scake", "stock": 1, "previewImage":"https://placekitten.com/128/96"},
+                    {"name":"New Cookie", "price":10.00, "sku":"newcookie", "stock": 0, "previewImage":"https://placekitten.com/96/96"},
+                    {"name":"Peanut Butter", "price":10.00, "sku":"peanutbutter", "stock": 2, "previewImage":"https://placekitten.com/64/96"},
+                    {"name":"Candy Bar", "price":10.00, "sku":"candybar", "stock": 3, "previewImage":"https://placekitten.com/128/40"}
+                ]
+            },
+            "stubDelayMs": 200
+        },
+        "products/get-recommended-promo-prices": {
+            "requiredParams": {},
+            "shortDescription": "Gets recommended products special pricing if applicable",
+            "stubReturn": {
+                "products":[
+                    {"name":"Super Cake", "price":19.95, "sku":"scake", "stock": 1, "previewImage":"https://placekitten.com/128/96"},
+                    {"name":"New Cookie", "price":4.95, "sku":"newcookie", "stock": 0, "previewImage":"https://placekitten.com/96/96"},
+                    {"name":"Peanut Butter", "price":2.95, "sku":"peanutbutter", "stock": 2, "previewImage":"https://placekitten.com/64/96"},
+                    {"name":"Candy Bar", "price":1.95, "sku":"candybar", "stock": 3, "previewImage":"https://placekitten.com/128/40"}
+                ]
+            },
+            "stubDelayMs": 200
+        }
+    },
+
+    "engine": {
+        "version": "Fairmont Mobile Demo",
+        "bind": ":8888",
+        "tlsEnabled": false,
+        "authMode": "simple",
+        "prettyOutput": false,
+        "docsEnabled": true,
+        "advanced": {
+            "stubMode": true,
+            "stubDelayMs": 50,
+            "completeResultExpiration": "30s",
+            "completeResultLoopFreq": "5s",
+            "debugFormEnabled": true
+        }
+    },
+
+    "logging": {
+        "level": "info"
+    },
+
+    "security": {
+        "verifyTimeout": 20,
+        "groups": [{
+            "name": "engineadmin",
+            "hmackey": "admin_key_here"
+        }, {
+            "name": "publicweb",
+            "hmackey": "webaccess1",
+            "requestsPerSecond": 500
+        }, {
+            "name": "publicthrottled",
+            "hmackey": "throttleaccess1",
+            "requestsPerSecond": 10
+        }],
+        "handlerAccess": [{
+          "handler": "/debug-log",
+          "allowGroups": ["engineadmin"]
+        }, {
+          "handler": "/echo/",
+          "allowGroups": ["engineadmin"]
+        }, {
+          "handler": "/get-config",
+          "allowGroups": ["engineadmin"]
+        }, {
+          "handler": "/pending",
+          "allowGroups":  ["engineadmin"]
+        }, {
+          "handler": "/save-config",
+          "allowGroups": ["engineadmin"]
+        }, {
+          "handler": "/stats",
+          "allowGroups": ["engineadmin"]
+        }],
+        "corsDomains":["http://localhost:8080"],
+        "corsAutoAddLocal": true
+    },
+
+    "workerConfig": {
+        "someGlobalDbInfo": {
+            "host": "localhost",
+            "port": 5359,
+            "user": "write",
+            "pass": "12345"
+        },
+        "cdn": {
+            "base":"https://placekitten.com/"
+        }
+    }
+}
+
