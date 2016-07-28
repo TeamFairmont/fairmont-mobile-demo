@@ -1,5 +1,25 @@
 {
     "apiCalls": {
+        "mobile/adjustCart": {
+            "resultTimeoutMs": 500,
+            "resultZombieMs": 5000,
+            "requiredParams": {},
+            "commands": [{
+                "name": "cart/adjust",
+                "resultTimeoutMs": 500,
+                "configParams": {
+                    "mode": "simple"
+                }
+            },{
+                "name": "cart/validate",
+                "resultTimeoutMs": 200,
+                "configParams": {
+                    "allowOversell": true
+                }
+            }],
+            "filterKeys": ["return_value","complete","id","error"],
+            "shortDescription": "This call updates the quantity of a sku in cart (or adds or removes it), and returns the complete cart"
+        },
         "mobile/getHomeBanners": {
             "resultTimeoutMs": 300,
             "resultZombieMs": 5000,
@@ -73,7 +93,31 @@
     },
 
     "commandMeta": { 
-	    "home/banners": {
+	    "cart/adjust": {
+            "requiredParams": {},
+            "shortDescription": "This worker adjusts or creates the cart id session with the sku and quantity provided. Takes an array of products.",
+            "stubReturn": {
+                "cartItems":[] 
+            },
+            "stubDelayMs": 20
+        },
+        "cart/validate": {
+            "requiredParams": {},
+            "shortDescription": "This worker computes totals, checks promos, and verifies inventory, etc.",
+            "stubReturn": {
+                "cartItems":[
+                    {"name":"White Cake", "price":45, "sku":"wcake", "stock": 1, "meta": { "giftmessage":"Happy birthday!" }, "previewImage":"https://placekitten.com/118/96"},
+                    {"name":"Chocolate Cake", "price":50, "sku":"ccake", "stock": 1, "meta": {}, "previewImage":"https://placekitten.com/118/97"}
+                ], 
+                "subtotal":95,
+                "shipping":5,
+                "tax":5.54,
+                "total":105.54,
+                "promos":["23","ABC"]
+            },
+            "stubDelayMs": 1200
+        },
+        "home/banners": {
             "requiredParams": {},
             "shortDescription": "This worker grabs homepage banners using the configParam.platform field",
             "stubReturn": {

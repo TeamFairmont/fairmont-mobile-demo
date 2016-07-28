@@ -1,4 +1,5 @@
 import {pageManager, boltCall} from 'Shared'
+import {CartPopover} from 'components/CartPopover'
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
@@ -24,7 +25,7 @@ export class ProductDetailPage extends React.Component<Props, { product:any }> {
                     </div> 
                     <div className="center">{this.props.sku}</div>
                     <div className="right" onClick={this.handleClick.bind(this)}>
-                        <ons-toolbar-button><ons-icon icon="ion-ios-cart" /> Buy</ons-toolbar-button>
+                        <ons-toolbar-button id="buybutton"><ons-icon icon="ion-ios-cart" /> Buy</ons-toolbar-button>
                     </div>
                 </ons-toolbar>
                 <ons-carousel style={{height:"150px"}} swipeable overscrollable auto-scroll auto-refresh>
@@ -41,18 +42,17 @@ export class ProductDetailPage extends React.Component<Props, { product:any }> {
                     <br/>
                     {this.state.product.desc}
                 </div>              
+                <div id="cartholder"></div>
             </ons-page>;
     }
 
     private handleClick = (ev:Event) => {
-        ons.notification.alert("Successfully added to cart, thanks for shopping with us!");
-        ons.notification.alert("To-Do: Normally this would make a call to Fairmont API v1/cart/adjustCart");
+        ReactDOM.render(<CartPopover productToAdd={this.props.sku} message="Successfully added to cart!" cartId="123"></CartPopover>,document.getElementById("cartholder"));
     }
 
-    public componentDidMount = () => {
+    private componentDidMount = () => {
         boltCall("mobile/getProductDetail", {sku: this.props.sku}, (result:any) => {
             this.setState({product: result.return_value});
-            //console.log(result.return_value);
         });
     }
 }

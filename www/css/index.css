@@ -6,6 +6,10 @@ body {
     overflow-x:hidden;
 }
 
+.popover__content {
+    width: 280px;
+}
+
 .oos {
     background-color: #bbb;
 }

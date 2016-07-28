@@ -27,6 +27,6 @@ export class MainMenu extends React.Component<MenuProps, {}> {
     }
 
     private handleCart = () => {
-        ons.notification.alert('To-Do: Normally this would make a request to Fairmont API v1/cart/getCart and display results');
+        ons.notification.alert('To-Do: Normally this would make an empty request to Fairmont API mobile/adjustCart and display results');
     }
 }

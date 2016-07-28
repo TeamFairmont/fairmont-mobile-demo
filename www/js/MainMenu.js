@@ -13,7 +13,7 @@ define(["require", "exports", "react"], function (require, exports, React) {
                 window.location.href = "/";
             };
             this.handleCart = function () {
-                ons.notification.alert('To-Do: Normally this would make a request to Fairmont API v1/cart/getCart and display results');
+                ons.notification.alert('To-Do: Normally this would make an empty request to Fairmont API mobile/adjustCart and display results');
             };
         }
         MainMenu.prototype.render = function () {
